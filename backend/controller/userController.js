@@ -114,3 +114,10 @@ res.status(200).json({
     message: "New Admin Registered",
 });
 });
+export const getAllDoctors = catchAsyncErrors(async (req, res, next) => {
+const doctors = await User.find({ role:"Doctor" });
+res.status(200).json({
+    success:true,
+    doctors,
+});
+});

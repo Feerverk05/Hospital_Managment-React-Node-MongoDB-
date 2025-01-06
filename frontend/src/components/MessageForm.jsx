@@ -37,18 +37,18 @@ const MessageForm = () => {
   return (
     <>
       <div className="container form-component message-form">
-        <h2>Send Us A Message</h2>
+        <h2>Відправити повідомлення</h2>
         <form onSubmit={handleMessage}>
           <div>
             <input
               type="text"
-              placeholder="First Name"
+              placeholder="Ім'я"
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
             />
             <input
               type="text"
-              placeholder="Last Name"
+              placeholder="Прізвище"
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
             />
@@ -62,19 +62,19 @@ const MessageForm = () => {
             />
             <input
               type="number"
-              placeholder="Mobile Number"
+              placeholder="Номер телефону"
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
             />
           </div>
           <textarea
             rows={7}
-            placeholder="Message"
+            placeholder="Повідомлення"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
           <div style={{ justifyContent: "center", alignItems: "center" }}>
-            <button type="submit">Send</button>
+            <button type="submit">Надіслати</button>
           </div>
         </form>
         <img src="/Vector.png" alt="vector" />

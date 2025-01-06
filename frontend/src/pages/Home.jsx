@@ -7,8 +7,8 @@ import MessageForm from "../components/MessageForm";
 const Home = () => {
   return (
     <>
-      <Hero />
-      <Biography />
+      <Hero title ={"Електронна система охорони здоров'я в Україні"} imageUrl={"/hero.png"}/>
+      <Biography imageUrl={"/about.png"} />
       <Departments />
       <MessageForm />
     </>

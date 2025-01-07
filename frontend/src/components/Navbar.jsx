@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Context } from "../main";
 import { toast } from "react-toastify";
+import { GiHamburgerMenu } from "react-icons/gi";
 import axios from "axios";
 const Navbar = () => {
     const [show, setShow] = useState(false);
@@ -42,8 +43,10 @@ const Navbar = () => {
                 <button className="loginBtn btn" onClick={goToLogin}>Увійти</button>
             )}
         </div>
-        </nav>
-  )
-}
+        <div className="hamburger" onClick={() => setShow(!show)}>
+          <GiHamburgerMenu />
+        </div>        </nav>
+  );
+};
 
 export default Navbar

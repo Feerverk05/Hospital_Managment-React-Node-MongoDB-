@@ -36,10 +36,10 @@ const Navbar = () => {
                 <Link to ={"/appointments"}>Призначення</Link>
                 <Link to ={"/about"}>Про нас</Link>
             </div>
-            {!isAuthenticated ? (
+            {isAuthenticated ? (
                 <button className="logoutBtn btn" onClick={handleLogout}>Вийти</button>
             ) : (
-                <button className="logoutBtn" onClick={gotoLogin}>Увійти</button>
+                <button className="loginBtn btn" onClick={goToLogin}>Увійти</button>
             )}
         </div>
         </nav>

@@ -7,33 +7,28 @@ const Footer = () => {
   const hours = [
     {
       id: 1,
-      day: "Monday",
-      time: "9:00 AM - 11:00 PM",
+      day: "Понеділок",
+      time: "9:00 - 23:00 ",
     },
     {
       id: 2,
-      day: "Tuesday",
-      time: "12:00 PM - 12:00 AM",
+      day: "Вівторок",
+      time: "12:00 - 22:00 ",
     },
     {
       id: 3,
-      day: "Wednesday",
-      time: "10:00 AM - 10:00 PM",
+      day: "Середа",
+      time: "10:00 - 23:00",
     },
     {
       id: 4,
-      day: "Thursday",
-      time: "9:00 AM - 9:00 PM",
+      day: "Четвер",
+      time: "9:00 - 21:00",
     },
     {
       id: 5,
-      day: "Monday",
-      time: "3:00 PM - 9:00 PM",
-    },
-    {
-      id: 6,
-      day: "Saturday",
-      time: "9:00 AM - 3:00 PM",
+      day: "П'ятниця",
+      time: "8:00 - 17:00",
     },
   ];
 
@@ -43,18 +38,17 @@ const Footer = () => {
         <hr />
         <div className="content">
           <div>
-            <img src="/logo.png" alt="logo" className="logo-img"/>
+            <img src="/logogo.png" alt="logo" className="logo-img"/>
           </div>
           <div>
-            <h4>Quick Links</h4>
             <ul>
-              <Link to={"/"}>Home</Link>
-              <Link to={"/appointment"}>Appointment</Link>
-              <Link to={"/about"}>About</Link>
+              <Link to={"/"}>Головна</Link>
+              <Link to={"/appointment"}>Призначення</Link>
+              <Link to={"/about"}>Про нас</Link>
             </ul>
           </div>
           <div>
-            <h4>Hours</h4>
+            <h4>Години роботи</h4>
             <ul>
               {hours.map((element) => (
                 <li key={element.id}>
@@ -65,18 +59,18 @@ const Footer = () => {
             </ul>
           </div>
           <div>
-            <h4>Contact</h4>
+            <h4>Контактні данні</h4>
             <div>
               <FaPhone />
-              <span>999-999-9999</span>
+              <span>099-34-67-114</span>
             </div>
             <div>
               <MdEmail />
-              <span>zeelab@gmail.com</span>
+              <span>barabolya123@gmail.com</span>
             </div>
             <div>
               <FaLocationArrow />
-              <span>Karachi, Pakistan</span>
+              <span>Hololobova Kateryna, Ukraine</span>
             </div>
           </div>
         </div>

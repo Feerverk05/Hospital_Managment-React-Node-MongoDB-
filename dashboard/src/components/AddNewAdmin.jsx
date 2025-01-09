@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+import { Navigate, useNavigate } from 'react-router-dom';
+import { Context } from '../main';
 
 const AddNewAdmin = () => 
 {
@@ -21,7 +23,7 @@ const AddNewAdmin = () =>
       await axios
         .post(
           "http://localhost:4000/api/v1/user/admin/addnew",
-          { firstName, lastName, email, phone, nic, dob, gender, password },
+          { firstName, lastName, email, phone, nic, dob, gender, password},
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },

@@ -49,9 +49,72 @@ const AddNewAdmin = () =>
     return <Navigate to={"/login"} />;
   }
     return (
-        <div>
-
-        </div>
-    )
-}
-export default AddNewAdmin
+        <section className='page'>
+            <section className='container form-component add-admin-form'>
+                <img src="/logo.png" alt="logo" className='logo'/>
+                <h1 className='form-title'>Додати нового адміністратора</h1>
+        <form onSubmit={handleAddNewAdmin}>
+          <div>
+            <input
+              type="text"
+              placeholder="Ім'я"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Прізвище"
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="text"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+            <input
+              type="number"
+              placeholder="Телефон"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+            />
+          </div>
+          <div>
+            <input
+              type="number"
+              placeholder="Індентифікаційний код"
+              value={nic}
+              onChange={(e) => setNic(e.target.value)}
+            />
+            <input
+              type={"date"}
+              placeholder="Дата народження"
+              value={dob}
+              onChange={(e) => setDob(e.target.value)}
+            />
+          </div>
+          <div>
+            <select value={gender} onChange={(e) => setGender(e.target.value)}>
+              <option value="">Оберіть стать:</option>
+              <option value="Male">Жінка</option>
+              <option value="Female">Чоловік</option>
+            </select>
+            <input
+              type="password"
+              placeholder="Пароль"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div style={{ justifyContent: "center", alignItems: "center" }}>
+            <button type="submit">Додати нового адміністратора</button>
+          </div>
+        </form>
+      </section>
+        </section>
+    );
+};
+export default AddNewAdmin;

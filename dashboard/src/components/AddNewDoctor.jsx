@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Context } from '../main';
+import React, { useContext, useState } from "react";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { Context } from "../main";
+import axios from "axios";
 
-const AddNewDoctor = () => 
-{
-    const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+const AddNewDoctor = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -21,15 +22,15 @@ const AddNewDoctor = () =>
   const navigateTo = useNavigate();
 
   const departmentsArray = [
-    "Педіатр",
-    "Ортопед",
-    "Кардіолог",
-    "Невролог",
-    "Онколог",
-    "МРТ",
-    "Фізична терапія",
-    "Дерматолог",
-    "ЛОР",
+    "Pediatrics",
+    "Orthopedics",
+    "Cardiology",
+    "Neurology",
+    "Oncology",
+    "Radiology",
+    "Physical Therapy",
+    "Dermatology",
+    "ENT",
   ];
 
   const handleAvatar = (e) => {
@@ -37,15 +38,15 @@ const AddNewDoctor = () =>
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => {
-        setDocAvatarPreview(reader.result);
-        setDocAvatar(file);
+      setDocAvatarPreview(reader.result);
+      setDocAvatar(file);
     };
   };
 
   const handleAddNewDoctor = async (e) => {
     e.preventDefault();
     try {
-        const formData = new FormData();
+      const formData = new FormData();
       formData.append("firstName", firstName);
       formData.append("lastName", lastName);
       formData.append("email", email);
@@ -57,13 +58,10 @@ const AddNewDoctor = () =>
       formData.append("doctorDepartment", doctorDepartment);
       formData.append("docAvatar", docAvatar);
       await axios
-        .post(
-          "http://localhost:4000/api/v1/user/doctor/addnew", formData,
-          {
-            withCredentials: true,
-            headers: { "Content-Type": "multipart/form-data" },
-          }
-        )
+        .post("http://localhost:4000/api/v1/user/doctor/addnew", formData, {
+          withCredentials: true,
+          headers: { "Content-Type": "multipart/form-data" },
+        })
         .then((res) => {
           toast.success(res.data.message);
           setIsAuthenticated(true);
@@ -82,75 +80,83 @@ const AddNewDoctor = () =>
     }
   };
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return <Navigate to={"/login"} />;
   }
-    return (
-        <section className='page'>
-            <section className='container add-doctor-form'>
-                <img src="/logo.png" alt="logo" className='logo'/>
-                <h1 className='form-title'>Додати нового доктора</h1>
-                <form onSubmit={handleAddNewDoctor}>
-          <div className='first-wrapper'>
+  return (
+    <section className="page">
+      <section className="container add-doctor-form">
+        <img src="/logo.png" alt="logo" className="logo"/>
+        <h1 className="form-title">Додати нового лікаря</h1>
+        <form onSubmit={handleAddNewDoctor}>
+          <div className="first-wrapper">
             <div>
-                <img src={ docAvatarPreview ? `${docAvatarPreview}` : "/doc.jpg"} alt="Doctor Avatar"/>
-                <input type="file" onChange={handleAvatar}/>
-                </div>
-                <div>
-            <input
-              type="text"
-              placeholder="Ім'я"
-              value={firstName}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Прізвище"
-              value={lastName}
-              onChange={(e) => setLastName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Телефон"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-            />
-            <input
-              type="number"
-              placeholder="Індентифікаційний код"
-              value={nic}
-              onChange={(e) => setNic(e.target.value)}
-            />
-            <input
-              type={"date"}
-              placeholder="Дата народження"
-              value={dob}
-              onChange={(e) => setDob(e.target.value)}
-            />
-            <select value={gender} onChange={(e) => setGender(e.target.value)}>
-              <option value="">Оберіть стать:</option>
-              <option value="Male">Жінка</option>
-              <option value="Female">Чоловік</option>
-            </select>
-            <input   
-              type="password"
-              placeholder="Пароль"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <select
+              <img
+                src={
+                  docAvatarPreview ? `${docAvatarPreview}` : "/doc.jpg"
+                }
+                alt="Doctor Avatar"
+              />
+              <input type="file" onChange={handleAvatar} />
+            </div>
+            <div>
+              <input
+                type="text"
+                placeholder="Ім'я"
+                value={firstName}
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Прізвище"
+                value={lastName}
+                onChange={(e) => setLastName(e.target.value)}
+              />
+              <input
+                type="text"
+                placeholder="Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Телефон"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <input
+                type="number"
+                placeholder="Ідентифікаційний номер лікаря"
+                value={nic}
+                onChange={(e) => setNic(e.target.value)}
+              />
+              <input
+                type={"date"}
+                placeholder="Дата народження"
+                value={dob}
+                onChange={(e) => setDob(e.target.value)}
+              />
+              <select
+                value={gender}
+                onChange={(e) => setGender(e.target.value)}
+              >
+                <option value="">Оберіть стать:</option>
+                <option value="Male">Жінка</option>
+                <option value="Female">Чоловік</option>
+              </select>
+              <input
+                type="password"
+                placeholder="Пароль"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+              <select
                 value={doctorDepartment}
                 onChange={(e) => {
                   setDoctorDepartment(e.target.value);
                 }}
               >
-                <option value="">Select Department</option>
+                <option value="">Оберіть відділ</option>
                 {departmentsArray.map((depart, index) => {
                   return (
                     <option value={depart} key={index}>
@@ -159,7 +165,7 @@ const AddNewDoctor = () =>
                   );
                 })}
               </select>
-            <button type="submit">Додати нового лікаря</button>
+              <button type="submit">Зареєструвати лікаря</button>
             </div>
           </div>
         </form>

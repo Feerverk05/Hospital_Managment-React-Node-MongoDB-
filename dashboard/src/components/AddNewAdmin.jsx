@@ -1,10 +1,11 @@
-import React, { useContext, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom';
-import { Context } from '../main';
+import React, { useContext, useState } from "react";
+import { Context } from "../main";
+import { Navigate, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
-const AddNewAdmin = () => 
-{
-    const { isAuthenticated, setIsAuthenticated } = useContext(Context);
+const AddNewAdmin = () => {
+  const { isAuthenticated, setIsAuthenticated } = useContext(Context);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -23,7 +24,7 @@ const AddNewAdmin = () =>
       await axios
         .post(
           "http://localhost:4000/api/v1/user/admin/addnew",
-          { firstName, lastName, email, phone, nic, dob, gender, password},
+          { firstName, lastName, email, phone, nic, dob, gender, password },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
@@ -47,14 +48,15 @@ const AddNewAdmin = () =>
     }
   };
 
-  if (isAuthenticated) {
+  if (!isAuthenticated) {
     return <Navigate to={"/login"} />;
   }
-    return (
-        <section className='page'>
-            <section className='container form-component add-admin-form'>
-                <img src="/logo.png" alt="logo" className='logo'/>
-                <h1 className='form-title'>Додати нового адміністратора</h1>
+
+  return (
+    <section className="page">
+      <section className="container form-component add-admin-form">
+      <img src="/logo.png" alt="logo" className="logo"/>
+        <h1 className="form-title">Додати нового адміністратора</h1>
         <form onSubmit={handleAddNewAdmin}>
           <div>
             <input
@@ -87,7 +89,7 @@ const AddNewAdmin = () =>
           <div>
             <input
               type="number"
-              placeholder="Індентифікаційний код"
+              placeholder="Ідентифікаційни номер адміністратора"
               value={nic}
               onChange={(e) => setNic(e.target.value)}
             />
@@ -100,7 +102,7 @@ const AddNewAdmin = () =>
           </div>
           <div>
             <select value={gender} onChange={(e) => setGender(e.target.value)}>
-              <option value="">Оберіть стать:</option>
+              <option value="">Оберіть стать</option>
               <option value="Male">Жінка</option>
               <option value="Female">Чоловік</option>
             </select>
@@ -116,7 +118,8 @@ const AddNewAdmin = () =>
           </div>
         </form>
       </section>
-        </section>
-    );
+    </section>
+  );
 };
+
 export default AddNewAdmin;
